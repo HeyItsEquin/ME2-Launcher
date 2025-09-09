@@ -1,8 +1,0 @@
-{
-  "profiles": {
-    "ME2Launcher": {
-      "commandName": "Project",
-      "workingDirectory": "$(ProjectDir)"
-    }
-  }
-}
