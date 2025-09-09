@@ -3,3 +3,5 @@ ME2Launcher.csproj.user
 AssemblyInfo.cs
 bin/
 obj/
+Properties/
+Internal/Profiles/*
