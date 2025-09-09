@@ -5,3 +5,4 @@ bin/
 obj/
 Properties/
 Internal/Profiles/*
+!Internal/Profiles/example_profile.json
