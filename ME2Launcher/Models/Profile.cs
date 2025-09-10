@@ -10,7 +10,7 @@ namespace ME2Launcher.Models
         public string Description { get; set; }
 
         public List<Mod> ModList { get; set; }
-        public List<DllMod> DllMods { get; set; }
+        public List<Dll> DllMods { get; set; }
 
         Profile()
         {
@@ -18,7 +18,7 @@ namespace ME2Launcher.Models
             Name = string.Empty;
             Description = string.Empty;
             ModList = new List<Mod>();
-            DllMods = new List<DllMod>();
+            DllMods = new List<Dll>();
         }
     }
 }

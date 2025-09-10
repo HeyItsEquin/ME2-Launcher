@@ -3,22 +3,14 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:ME2Launcher"
+        xmlns:local="clr-namespace:ME2Launcher.Views.Controls"
         mc:Ignorable="d"
 		xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
-        Title="ME2Launcher" Height="450" Width="800">
-
+        Title="ME2Launcher" Height="720" Width="1280">
     <Grid
         Name="PanelMainGrid"
         Background="{StaticResource PrimaryBackgroundBrush}">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
-        </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="auto" />
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
 
-
+        <local:MainContent />
     </Grid>
 </Window>

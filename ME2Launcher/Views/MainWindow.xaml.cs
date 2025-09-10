@@ -8,6 +8,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Wpf.Ui.Controls;
 
 namespace ME2Launcher
 {
@@ -19,16 +20,6 @@ namespace ME2Launcher
         public MainWindow()
         {
             InitializeComponent();
-        }
-
-        private void MenuItem_Exit_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void MenuItem_About_Click(object sender, RoutedEventArgs e)
-        {
-
         }
     }
 }
