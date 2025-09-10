@@ -1,46 +1,40 @@
-using System;
+﻿using System;
 using Microsoft.Data.Sqlite;
 
-namespace ME2Launcher
+namespace ME2Launcher.Services
 {
-    public static class Database
+    public static class DatabaseService
     {
-        public static string DbFilePath = @"Internal\Data.db";
-        
-        public static SqliteConnection? Connection;
+        public static string DbFilePath = @"Core\Data.db";
+        public static SqliteConnection Connection = new SqliteConnection($"DataSource={DbFilePath}");
 
         public static void InitializeDb()
         {
-            Connection = new SqliteConnection($"DataSource={DbFilePath}");
             Connection.Open();
-
-            string query =
-            @"
+            string query = @"
                 CREATE TABLE IF NOT EXISTS Profiles (
-                    Id INT PRIMARY KEY,
+                    Id TEXT PRIMARY KEY,
                     Name TEXT NOT NULL,
                     Description TEXT,
                     Mods TEXT,
                     Dll TEXT
                 );
-
                 CREATE TABLE IF NOT EXISTS Mods (
-                    Id INT PRIMARY KEY,
+                    Id TEXT PRIMARY KEY,
                     Name TEXT NOT NULL,
                     Description TEXT,
                     FilePath TEXT NOT NULL
                 );
-
                 CREATE TABLE IF NOT EXISTS Dlls (
-                    Id INT PRIMARY KEY,
+                    Id TEXT PRIMARY KEY,
                     Name TEXT NOT NULL,
                     Description TEXT,
                     FilePath TEXT NOT NULL
-                );
-            ";
-
+                );";
             SqliteCommand command = new SqliteCommand(query, Connection);
             command.ExecuteNonQuery();
         }
+
+
     }
 }

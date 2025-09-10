@@ -20,5 +20,15 @@ namespace ME2Launcher
         {
             InitializeComponent();
         }
+
+        private void MenuItem_Exit_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void MenuItem_About_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

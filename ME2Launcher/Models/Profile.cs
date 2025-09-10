@@ -1,11 +1,11 @@
 ﻿using System;
-using System.Diagnostics;
 
-namespace ME2Launcher
+namespace ME2Launcher.Models
 {
     public class Profile
     {
         public Guid Id { get; set; }
+
         public string Name { get; set; }
         public string Description { get; set; }
 
@@ -19,11 +19,6 @@ namespace ME2Launcher
             Description = string.Empty;
             ModList = new List<Mod>();
             DllMods = new List<DllMod>();
-        }
-
-        public void Start()
-        {
-
         }
     }
 }

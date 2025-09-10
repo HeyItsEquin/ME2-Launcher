@@ -1,8 +1,7 @@
-ME2Launcher.csproj
-ME2Launcher.csproj.user
-AssemblyInfo.cs
-bin/
-obj/
-Properties/
-Internal/Profiles/*
-!Internal/Profiles/example_profile.json
+ME2Launcher/ME2Launcher.csproj
+ME2Launcher/ME2Launcher.csproj.user
+ME2Launcher/AssemblyInfo.cs
+ME2Launcher/bin/
+ME2Launcher/obj/
+ME2Launcher/Properties/
+.vs

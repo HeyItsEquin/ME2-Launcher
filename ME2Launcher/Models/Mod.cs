@@ -1,30 +1,21 @@
 ﻿using System;
 
-namespace ME2Launcher
+namespace ME2Launcher.Models
 {
     public class Mod
     {
+        Guid Id { get; set; }
+
         string Path { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
 
         Mod()
         {
+            Id = Guid.NewGuid();
             Path = string.Empty;
             Name = string.Empty;
             Description = string.Empty;
-        }
-    }
-
-    public class DllMod
-    {
-        public string Name { get; set; }
-        public string Path { get; set; }
-
-        DllMod()
-        {
-            Name = string.Empty;
-            Path = string.Empty;
         }
     }
 }
