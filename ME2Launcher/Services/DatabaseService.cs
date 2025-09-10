@@ -1,5 +1,6 @@
 ﻿using System;
 using Microsoft.Data.Sqlite;
+using ME2Launcher.Models;
 
 namespace ME2Launcher.Services
 {
@@ -8,6 +9,8 @@ namespace ME2Launcher.Services
         public static string DbFilePath = @"Core\Data.db";
         public static SqliteConnection Connection = new SqliteConnection($"DataSource={DbFilePath}");
 
+        public static 
+        
         public static void InitializeDb()
         {
             Connection.Open();
@@ -35,6 +38,18 @@ namespace ME2Launcher.Services
             command.ExecuteNonQuery();
         }
 
+        public static List<Profile> GetProfiles()
+        {
+        }
 
+        public static List<Mod> GetMods()
+        {
+        }
+
+        public static List<DllMod> GetDllMods()
+        {
+        }
+
+        
     }
 }
