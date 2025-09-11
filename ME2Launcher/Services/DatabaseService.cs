@@ -1,4 +1,5 @@
 ﻿using Microsoft.Data.Sqlite;
+using System.Data;
 using ME2Launcher.Models;
 
 namespace ME2Launcher.Services
@@ -27,6 +28,11 @@ namespace ME2Launcher.Services
             ExecuteNonQuery("CREATE TABLE IF NOT EXISTS Dlls ( Id TEXT PRIMARY KEY, Name TEXT NOT NULL, Description TEXT, FilePath TEXT NOT NULL );");
         }
 
+        private static bool DbReadyToUse()
+        {
+            return Connection != null && Connection.State == ConnectionState.Open;
+        }
+
         private static void ExecuteNonQuery(string query)
         {
             new SqliteCommand(query, Connection).ExecuteNonQuery();
@@ -35,8 +41,12 @@ namespace ME2Launcher.Services
         public static List<Profile> GetProfiles()
         {
             List<Profile> pfs = new List<Profile>();
-            string query = "SELECT * FROM Profiles;";
-            SqliteCommand command = new SqliteCommand(query, Connection);
+            if (!DbReadyToUse())
+            {
+                Logger.Warn("Could not get profiles from DB");
+                return pfs;
+            }
+            var command = SqliteCommand("SELECT * FROM Profiles;");
             SqliteDataReader reader = command.ExecuteReader();
             while (reader.Read()) {
                 Profile pf = new Profile
@@ -55,8 +65,12 @@ namespace ME2Launcher.Services
         public static List<Mod> GetMods()
         {
             List<Mod> mods = new List<Mod>();
-            string query = "SELECT * FROM Mods;";
-            SqliteCommand command = new SqliteCommand(query, Connection);
+            if (!DbReadyToUse())
+            {
+                Logger.Warn("Could not get mods from DB");
+                return mods;
+            }
+            var command = SqliteCommand("SELECT * FROM Mods;");
             SqliteDataReader reader = command.ExecuteReader();
             while (reader.Read())
             {
@@ -75,8 +89,12 @@ namespace ME2Launcher.Services
         public static List<Dll> GetDllMods()
         {
             List<Dll> dlls = new List<Dll>();
-            string query = "SELECT * FROM Dlls;";
-            SqliteCommand command = new SqliteCommand(query, Connection);
+            if (!DbReadyToUse())
+            {
+                Logger.Warn("Could not get dll mods from DB");
+                return dlls;
+            }
+            var command = SqliteCommand("SELECT * FROM Dlls;");
             SqliteDataReader reader = command.ExecuteReader();
             while (reader.Read())
             {
@@ -99,6 +117,11 @@ namespace ME2Launcher.Services
 
         public static void CreateNewProfile(Profile p)
         {
+            if (!DbReadyToUse())
+            {
+                Logger.Warn("Could not create new profile in DB");
+                return;
+            }
             using var command = SqliteCommand("INSERT INTO profiles VALUES (@Id,  @Name, @Description, @Mods, @Dll);");
             command.Parameters.AddWithValue("@Id", p.Id.ToString());
             command.Parameters.AddWithValue("@Name", p.Name);
@@ -112,6 +135,11 @@ namespace ME2Launcher.Services
 
         public static void UpdateProfileById(Guid id, Profile new_profile)
         {
+            if (!DbReadyToUse())
+            {
+                Logger.Warn("Could not update profile in DB with ID: " + id);
+                return;
+            }
             using var command = SqliteCommand("UPDATE Profiles SET Name = @Name, Description = @Description, Mods = @Mods, Dll = @Dll WHERE Id = @Id;");
             command.Parameters.AddWithValue("@Id", id.ToString());
             command.Parameters.AddWithValue("@Name", new_profile.Name);
