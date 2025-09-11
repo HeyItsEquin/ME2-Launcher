@@ -2,6 +2,7 @@
 using System.Windows;
 using System.Windows.Threading;
 using ME2Launcher.Services;
+using ME2Launcher.Tests;
 
 namespace ME2Launcher
 {
@@ -18,8 +19,11 @@ namespace ME2Launcher
         protected override void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);
+            Logger.ClearLog();
             Logger.Info("Initializing database");
             DatabaseService.InitializeDb();
+
+            Testing.RunAllTests();
         }
 
         private void Application_DispatcherUnhandledException(object sender, DispatcherUnhandledExceptionEventArgs e)
