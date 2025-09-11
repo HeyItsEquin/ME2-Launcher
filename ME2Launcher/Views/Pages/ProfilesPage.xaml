@@ -5,15 +5,19 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
       xmlns:local="clr-namespace:ME2Launcher.Views.Pages"
+      xmlns:models="clr-namespace:ME2Launcher.Models"
+      xmlns:control="clr-namespace:ME2Launcher.Views.Controls"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="ProfilesPage">
 
     <Grid>
-        <TextBlock Text="Profiles"
-                   Foreground="{ui:ThemeResource TextFillColorPrimaryBrush}"
-                   FontSize="20"
-                   LineHeight="28"/>
-
+        <ItemsControl ItemsSource="{Binding Profiles}">
+            <ItemsControl.ItemTemplate>
+                <DataTemplate DataType="{x:Type models:Profile}">
+                    <control:ProfileItem ProfileName="{Binding Name}" ProfileDescription="{Binding Description}" ProfileId="{Binding Id}" />
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
     </Grid>
 </Page>

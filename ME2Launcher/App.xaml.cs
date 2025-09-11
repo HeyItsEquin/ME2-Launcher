@@ -1,6 +1,7 @@
-﻿using System.Configuration;
-using System.Data;
+﻿using System;
 using System.Windows;
+using System.Windows.Threading;
+using ME2Launcher.Services;
 
 namespace ME2Launcher
 {
@@ -9,6 +10,22 @@ namespace ME2Launcher
     /// </summary>
     public partial class App : Application
     {
-    }
+        public App()
+        {
 
+        }
+
+        protected override void OnStartup(StartupEventArgs e)
+        {
+            base.OnStartup(e);
+            DatabaseService.InitializeDb();
+        }
+
+        private void Application_DispatcherUnhandledException(object sender, DispatcherUnhandledExceptionEventArgs e)
+        {
+            Logger.LogException(e.Exception, "Unhandled Exception");
+            Logger.ShowMessageBox(e.Exception.Message, "An unhandled exception occurred");
+            e.Handled = true;
+        }
+    }
 }

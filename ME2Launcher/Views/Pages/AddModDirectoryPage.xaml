@@ -10,10 +10,6 @@
       Title="AddModDirectoryPage">
 
     <Grid>
-        <TextBlock Text="Add Mod Directory"
-                   Foreground="{ui:ThemeResource TextFillColorPrimaryBrush}"
-                   FontSize="20"
-                   LineHeight="28"/>
 
     </Grid>
 </Page>

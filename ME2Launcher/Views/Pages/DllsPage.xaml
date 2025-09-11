@@ -10,10 +10,6 @@
       Title="DllsPage">
 
     <Grid>
-        <TextBlock Text="DLL Mods"
-                   Foreground="{ui:ThemeResource TextFillColorPrimaryBrush}"
-                   FontSize="20"
-                   LineHeight="28"/>
 
     </Grid>
 </Page>

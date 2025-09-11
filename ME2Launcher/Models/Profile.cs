@@ -12,7 +12,7 @@ namespace ME2Launcher.Models
         public List<Mod> ModList { get; set; }
         public List<Dll> DllMods { get; set; }
 
-        Profile()
+        public Profile()
         {
             Id = Guid.NewGuid();
             Name = string.Empty;

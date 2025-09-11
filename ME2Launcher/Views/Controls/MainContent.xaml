@@ -9,7 +9,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-        <ui:NavigationView Name="RootNav" IsBackButtonVisible="Auto" Margin="0,12" Background="{StaticResource SecondaryBackgroundBrush}">
+        <ui:NavigationView Name="RootNav" IsBackButtonVisible="Collapsed" Margin="0,12" Background="{StaticResource SecondaryBackgroundBrush}">
             <ui:NavigationView.MenuItems>
                 <ui:NavigationViewItem Content="Home" Icon="{ui:SymbolIcon Symbol=Home24}" Tag="home" TargetPageType="{x:Type pages:HomePage}">
                 </ui:NavigationViewItem>

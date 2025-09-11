@@ -10,10 +10,6 @@
       Title="AddDllModPage">
 
     <Grid>
-        <TextBlock Text="Add DLL Mod"
-                   Foreground="{ui:ThemeResource TextFillColorPrimaryBrush}"
-                   FontSize="20"
-                   LineHeight="28"/>
-
+        
     </Grid>
 </Page>
