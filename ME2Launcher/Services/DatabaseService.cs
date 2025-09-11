@@ -1,7 +1,5 @@
-﻿using System;
-using Microsoft.Data.Sqlite;
+﻿using Microsoft.Data.Sqlite;
 using ME2Launcher.Models;
-using System.Security.RightsManagement;
 
 namespace ME2Launcher.Services
 {
@@ -12,30 +10,26 @@ namespace ME2Launcher.Services
 
         public static void InitializeDb()
         {
+            Logger.Info("Initializing DB connection at '" + DbFilePath + "'");
             Connection = new SqliteConnection($"DataSource={DbFilePath}");
             Connection.Open();
-            string query = @"
-                CREATE TABLE IF NOT EXISTS Profiles (
-                    Id TEXT PRIMARY KEY,
-                    Name TEXT NOT NULL,
-                    Description TEXT,
-                    Mods TEXT,
-                    Dll TEXT
-                );
-                CREATE TABLE IF NOT EXISTS Mods (
-                    Id TEXT PRIMARY KEY,
-                    Name TEXT NOT NULL,
-                    Description TEXT,
-                    FilePath TEXT NOT NULL
-                );
-                CREATE TABLE IF NOT EXISTS Dlls (
-                    Id TEXT PRIMARY KEY,
-                    Name TEXT NOT NULL,
-                    Description TEXT,
-                    FilePath TEXT NOT NULL
-                );";
-            SqliteCommand command = new SqliteCommand(query, Connection);
-            command.ExecuteNonQuery();
+            Logger.Info("DB connection initialized and opened");
+
+            Logger.Info("Performing DB post initialization");
+            DbPostInitialize();
+            Logger.Info("DB post initialization complete");
+        }
+
+        private static void DbPostInitialize()
+        {
+            ExecuteNonQuery("CREATE TABLE IF NOT EXISTS Profiles ( Id TEXT PRIMARY KEY, Name TEXT NOT NULL, Description TEXT, Mods TEXT, Dll TEXT );");
+            ExecuteNonQuery("CREATE TABLE IF NOT EXISTS Mods ( Id TEXT PRIMARY KEY, Name TEXT NOT NULL, Description TEXT, FilePath TEXT NOT NULL );");
+            ExecuteNonQuery("CREATE TABLE IF NOT EXISTS Dlls ( Id TEXT PRIMARY KEY, Name TEXT NOT NULL, Description TEXT, FilePath TEXT NOT NULL );");
+        }
+
+        private static void ExecuteNonQuery(string query)
+        {
+            new SqliteCommand(query, Connection).ExecuteNonQuery();
         }
 
         public static List<Profile> GetProfiles()
@@ -98,36 +92,40 @@ namespace ME2Launcher.Services
             return dlls;
         }
     
+        public static SqliteCommand SqliteCommand(string query)
+        {
+            return new SqliteCommand(query, Connection);
+        }
+
         public static void CreateNewProfile(Profile p)
         {
-            const string query = @"
-            INSERT INTO Profiles (Id, Name, Description, Mods, Dll)
-            VALUES (@Id, @Name, @Description, @Mods, @Dll);";
-
-            using var command = new SqliteCommand(query, Connection);
+            using var command = SqliteCommand("INSERT INTO profiles VALUES (@Id,  @Name, @Description, @Mods, @Dll);");
             command.Parameters.AddWithValue("@Id", p.Id.ToString());
             command.Parameters.AddWithValue("@Name", p.Name);
             command.Parameters.AddWithValue("@Description", p.Description ?? string.Empty);
             command.Parameters.AddWithValue("@Mods", string.Join(";", p.ModList.Select(m => m.Id.ToString())));
             command.Parameters.AddWithValue("@Dll", string.Join(";", p.DllMods.Select(d => d.Id.ToString())));
 
+            Logger.Info("Creating new Profile in DB");
             command.ExecuteNonQuery();
         }
 
         public static void UpdateProfileById(Guid id, Profile new_profile)
         {
-            string query = "UPDATE Profiles SET Name = @Name, Description = @Description, Mods = @Mods, Dll = @Dll WHERE Id = @Id;";
-            SqliteCommand command = new SqliteCommand(query, Connection);
+            using var command = SqliteCommand("UPDATE Profiles SET Name = @Name, Description = @Description, Mods = @Mods, Dll = @Dll WHERE Id = @Id;");
             command.Parameters.AddWithValue("@Id", id.ToString());
             command.Parameters.AddWithValue("@Name", new_profile.Name);
             command.Parameters.AddWithValue("@Description", new_profile.Description);
             command.Parameters.AddWithValue("@Mods", string.Join(";", new_profile.ModList.Select(m => m.Id.ToString())));
             command.Parameters.AddWithValue("@Dll", string.Join(";", new_profile.DllMods.Select(d => d.Id.ToString())));
+
+            Logger.Info("Updating Profile in DB with ID: " + id);
             command.ExecuteNonQuery();
         }
 
         public static void CloseConnection()
         {
+            Logger.Info("Closing DB connection");
             Connection.Close();
         }
     }

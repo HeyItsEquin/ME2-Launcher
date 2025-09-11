@@ -12,12 +12,13 @@ namespace ME2Launcher
     {
         public App()
         {
-
+            Logger.Info("Application starting");
         }
 
         protected override void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);
+            Logger.Info("Initializing database");
             DatabaseService.InitializeDb();
         }
 

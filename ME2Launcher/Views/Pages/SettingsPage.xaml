@@ -10,10 +10,6 @@
       Title="SettingsPage">
 
     <Grid>
-        <TextBlock Text="Settings"
-                   Foreground="{ui:ThemeResource TextFillColorPrimaryBrush}"
-                   FontSize="20"
-                   LineHeight="28"/>
 
     </Grid>
 </Page>
