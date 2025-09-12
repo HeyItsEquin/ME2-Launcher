@@ -54,8 +54,8 @@ namespace ME2Launcher.Services
                     Id = Guid.Parse(reader.GetString(0)),
                     Name = reader.GetString(1),
                     Description = reader.IsDBNull(2) ? string.Empty : reader.GetString(2),
-                    ModList = [],
-                    DllMods = []
+                    ModListStr = reader.GetString(3),
+                    DllListStr = reader.GetString(4)
                 };
                 pfs.Add(pf);
             }
