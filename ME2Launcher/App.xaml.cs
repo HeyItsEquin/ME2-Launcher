@@ -22,6 +22,8 @@ namespace ME2Launcher
             Logger.ClearLog();
             Logger.Info("Initializing database");
             DatabaseService.InitializeDb();
+            ProfileService.LoadProfiles();
+            Logger.Info($"ProfileService loaded {ProfileService.Profiles.Count} profiles");
 
             Testing.RunAllTests();
         }

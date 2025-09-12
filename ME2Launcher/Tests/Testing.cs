@@ -8,6 +8,7 @@ namespace ME2Launcher.Tests
         public static void RunAllTests()
         {
             TestDatabaseService();
+            TestProfileService();
         }
 
         public static void TestDatabaseService()
@@ -19,6 +20,11 @@ namespace ME2Launcher.Tests
             Logger.Info($"Loaded {profiles.Count} profiles from DB");
             Logger.Info($"Loaded {mods.Count} mods from DB");
             Logger.Info($"Loaded {dlls.Count} DLL mods from DB");
+        }
+
+        public static void TestProfileService()
+        {
+            Logger.Info($"ProfileService loaded {ProfileService.Profiles.Count} profiles");
         }
     }
 }

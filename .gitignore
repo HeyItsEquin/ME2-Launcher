@@ -4,4 +4,5 @@ ME2Launcher/AssemblyInfo.cs
 ME2Launcher/bin/
 ME2Launcher/obj/
 ME2Launcher/Properties/
+ME2Launcher/app.log
 .vs

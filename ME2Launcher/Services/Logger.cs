@@ -10,12 +10,11 @@ namespace ME2Launcher.Services
 
         public static void ShowMessageBox(string content, string title)
         {
-            var box = new MessageBox
-            {
-                Title = title,
-                Content = content,
-                PrimaryButtonText = "Ok"
-            };
+            var box = new MessageBox();
+            box.Content = content;
+            box.Title = title;
+            box.CloseButtonText = "OK";
+            box.IsPrimaryButtonEnabled = false;
             box.ShowDialogAsync();
         }
 

@@ -3,23 +3,20 @@ using ME2Launcher.Models;
 
 namespace ME2Launcher.Services
 {
-    class ProfileService
+    public static class ProfileService
     {
-        public List<Profile> Profiles { get; set; }
+        public static List<Profile> Profiles { get; set; }
 
-        public ProfileService()
+        public static void LoadProfiles()
         {
-            Profiles = new List<Profile>();
-            Logger.Info("Loading profiles from DB");
-            LoadProfiles();
-        }
-
-        private void LoadProfiles()
-        {
+            if (Profiles == null)
+            {
+                Profiles = new List<Profile>();
+            }
             Profiles.Clear();
 
             var profiles = DatabaseService.GetProfiles();
-            if (profiles == null)
+            if (profiles == null || profiles.Count == 0)
             {
                 Logger.Warn("DB contains no profiles or failed to load them herein");
                 return;

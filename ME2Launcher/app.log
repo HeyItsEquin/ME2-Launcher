@@ -1,8 +1,11 @@
-2025-09-10 22:30:26 - [INFO] Initializing database
-2025-09-10 22:30:26 - [INFO] Initializing DB connection at 'C:\Users\Equin\Dev\ME2Launcher\ME2Launcher\Core\Data.db'
-2025-09-10 22:30:26 - [INFO] DB connection initialized and opened
-2025-09-10 22:30:26 - [INFO] Performing DB post initialization
-2025-09-10 22:30:26 - [INFO] DB post initialization complete
-2025-09-10 22:30:26 - [INFO] Loaded 1 profiles from DB
-2025-09-10 22:30:26 - [INFO] Loaded 1 mods from DB
-2025-09-10 22:30:26 - [INFO] Loaded 1 DLL mods from DB
+2025-09-11 19:17:26 - [INFO] Initializing database
+2025-09-11 19:17:26 - [INFO] Initializing DB connection at 'C:\Users\Equin\Dev\ME2Launcher\ME2Launcher\Core\Data.db'
+2025-09-11 19:17:26 - [INFO] DB connection initialized and opened
+2025-09-11 19:17:26 - [INFO] Performing DB post initialization
+2025-09-11 19:17:26 - [INFO] DB post initialization complete
+2025-09-11 19:17:26 - [ERROR] Unhandled Exception NullReferenceException: Object reference not set to an instance of an object.
+   at ME2Launcher.Services.ProfileService.LoadProfiles() in C:\Users\Equin\Dev\ME2Launcher\ME2Launcher\Services\ProfileService.cs:line 16
+   at ME2Launcher.App.OnStartup(StartupEventArgs e) in C:\Users\Equin\Dev\ME2Launcher\ME2Launcher\App.xaml.cs:line 25
+   at System.Windows.Application.<.ctor>b__1_0(Object unused)
+   at System.Windows.Threading.ExceptionWrapper.InternalRealCall(Delegate callback, Object args, Int32 numArgs)
+   at System.Windows.Threading.ExceptionWrapper.TryCatchWhen(Object source, Delegate callback, Object args, Int32 numArgs, Delegate catchHandler)
